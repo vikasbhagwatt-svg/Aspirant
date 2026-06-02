@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tiwana Nutrition — डेयरी फार्म समस्या निवारण गाइड</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Noto+Sans+Devanagari:wght@300;400;500;600&family=Noto+Serif+Devanagari:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #faf6ef;
+    --warm-white: #fffdf9;
+    --gold: #c9973a;
+    --gold-light: #e8c068;
+    --gold-dark: #9a6f1f;
+    --forest: #1e3a2f;
+    --forest-mid: #2e5442;
+    --forest-light: #4a7c5f;
+    --brown: #5c3d1e;
+    --text-dark: #1a1208;
+    --text-mid: #3d2b0e;
+    --text-light: #7a6040;
+    --border: #d4b88a;
+    --border-light: #e8d5b0;
+    --red-soft: #c0392b;
+    --blue-soft: #1a5276;
+    --teal: #1a6b5a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans Devanagari', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  header {
+    background: var(--forest);
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(201,151,58,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 30%, rgba(201,151,58,0.12) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 48px;
+    border-bottom: 1px solid rgba(201,151,58,0.3);
+  }
+  .brand { display: flex; align-items: center; gap: 14px; }
+  .brand-icon {
+    width: 52px; height: 52px;
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px; color: var(--gold); flex-shrink: 0;
+  }
+  .brand-name {
+    font-family: 'Playfair Display', serif;
+    color: var(--gold); font-size: 1.5rem; font-weight: 700;
+    letter-spacing: 0.04em; line-height: 1;
+  }
+  .brand-sub {
+    color: rgba(201,151,58,0.65); font-size: 0.72rem;
+    letter-spacing: 0.14em; text-transform: uppercase; margin-top: 3px;
+  }
+  .header-badge {
+    background: rgba(201,151,58,0.12);
+    border: 1px solid rgba(201,151,58,0.35);
+    border-radius: 6px; padding: 8px 18px;
+    color: var(--gold-light); font-size: 0.78rem;
+    letter-spacing: 0.06em; text-align: center; line-height: 1.5;
+  }
+  .header-hero {
+    padding: 56px 48px 64px;
+    position: relative; z-index: 1;
+  }
+  .hero-eyebrow {
+    color: var(--gold); font-size: 0.78rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    margin-bottom: 16px; display: flex; align-items: center; gap: 12px;
+  }
+  .hero-eyebrow::before {
+    content: ''; display: block; width: 40px; height: 1px; background: var(--gold);
+  }
+  .hero-title {
+    font-family: 'Noto Serif Devanagari', serif;
+    color: var(--warm-white);
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 600; line-height: 1.25;
+    max-width: 700px; margin-bottom: 20px;
+  }
+  .hero-title span { color: var(--gold-light); }
+  .hero-desc {
+    color: rgba(255,253,249,0.65); font-size: 1.05rem;
+    max-width: 560px; line-height: 1.7; margin-bottom: 36px;
+  }
+  .hero-stats { display: flex; gap: 36px; flex-wrap: wrap; }
+  .stat { display: flex; flex-direction: column; align-items: flex-start; }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem; color: var(--gold); font-weight: 700; line-height: 1;
+  }
+  .stat-label {
+    color: rgba(255,253,249,0.5); font-size: 0.75rem;
+    letter-spacing: 0.08em; margin-top: 4px;
+  }
+  nav {
+    background: var(--forest-mid);
+    border-bottom: 2px solid var(--gold-dark);
+    padding: 0 48px; display: flex; gap: 0;
+    overflow-x: auto; position: sticky; top: 0; z-index: 100;
+  }
+  nav::-webkit-scrollbar { height: 3px; }
+  nav::-webkit-scrollbar-thumb { background: var(--gold-dark); }
+  .nav-btn {
+    padding: 16px 22px; color: rgba(255,253,249,0.6);
+    font-size: 0.82rem; cursor: pointer; border: none; background: none;
+    border-bottom: 3px solid transparent; margin-bottom: -2px;
+    transition: all 0.25s; white-space: nowrap;
+    font-family: 'Noto Sans Devanagari', sans-serif; letter-spacing: 0.02em;
+  }
+  .nav-btn:hover { color: var(--gold-light); }
+  .nav-btn.active {
+    color: var(--gold); border-bottom-color: var(--gold);
+    background: rgba(201,151,58,0.07);
+  }
+  main { max-width: 1280px; margin: 0 auto; padding: 56px 48px; }
+  .section { display: none; animation: fadeIn 0.4s ease; }
+  .section.active { display: block; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .section-header {
+    display: flex; align-items: flex-start; gap: 24px;
+    margin-bottom: 40px; padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem; color: var(--gold-light); opacity: 0.25;
+    line-height: 1; flex-shrink: 0; margin-top: -8px;
+  }
+  .section-meta { flex: 1; }
+  .section-title {
+    font-family: 'Noto Serif Devanagari', serif;
+    font-size: 1.8rem; color: var(--forest);
+    font-weight: 600; line-height: 1.3; margin-bottom: 8px;
+  }
+  .section-note {
+    background: linear-gradient(135deg, var(--forest) 0%, var(--forest-mid) 100%);
+    color: rgba(255,253,249,0.85);
+    border-left: 3px solid var(--gold);
+    padding: 12px 18px; border-radius: 0 8px 8px 0;
+    font-size: 0.88rem; margin-top: 12px;
+    display: inline-block; line-height: 1.6;
+  }
+  .table-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border-light);
+    border-radius: 16px; overflow: hidden; margin-bottom: 32px;
+    box-shadow: 0 4px 24px rgba(30,58,47,0.06), 0 1px 4px rgba(0,0,0,0.04);
+  }
+  .table-card-header {
+    background: linear-gradient(135deg, var(--forest) 0%, var(--forest-mid) 100%);
+    padding: 18px 28px; display: flex; align-items: center; gap: 12px;
+  }
+  .table-card-icon {
+    width: 36px; height: 36px;
+    background: rgba(201,151,58,0.2);
+    border: 1px solid rgba(201,151,58,0.4);
+    border-radius: 8px; display: flex; align-items: center;
+    justify-content: center; font-size: 18px; flex-shrink: 0;
+  }
+  .table-card-title {
+    font-family: 'Noto Serif Devanagari', serif;
+    color: var(--cream); font-size: 1.05rem; font-weight: 600;
+  }
+  table { width: 100%; border-collapse: collapse; }
+  thead tr { background: var(--forest-light); }
+  thead th {
+    padding: 14px 20px; text-align: right;
+    color: rgba(255,253,249,0.92); font-size: 0.82rem;
+    font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+    border-right: 1px solid rgba(255,255,255,0.1);
+  }
+  thead th:last-child { border-right: none; }
+  tbody tr { border-bottom: 1px solid var(--border-light); transition: background 0.18s; }
+  tbody tr:hover { background: rgba(201,151,58,0.04); }
+  tbody tr:last-child { border-bottom: none; }
+  td {
+    padding: 14px 20px; font-size: 0.9rem; vertical-align: top;
+    line-height: 1.65; border-right: 1px solid var(--border-light);
+    color: var(--text-mid);
+  }
+  td:last-child { border-right: none; }
+  td:first-child { font-weight: 500; color: var(--forest); }
+  .col-cause { background: rgba(26,82,118,0.03); }
+  .col-symptom { background: rgba(192,57,43,0.03); }
+  .col-solution { background: rgba(26,107,90,0.04); }
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px; margin-top: 28px;
+  }
+  .step-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border-light);
+    border-radius: 12px; padding: 20px;
+    display: flex; gap: 16px; align-items: flex-start;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .step-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(30,58,47,0.1);
+  }
+  .step-num {
+    width: 36px; height: 36px; background: var(--forest);
+    border-radius: 50%; color: var(--gold);
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .step-text { font-size: 0.9rem; line-height: 1.55; color: var(--text-mid); padding-top: 6px; }
+  footer {
+    background: var(--forest);
+    color: rgba(255,253,249,0.5); text-align: center;
+    padding: 28px 48px; font-size: 0.8rem;
+    letter-spacing: 0.04em; border-top: 2px solid var(--gold-dark);
+  }
+  @media (max-width: 768px) {
+    .header-top, .header-hero, main { padding-left: 20px; padding-right: 20px; }
+    nav { padding: 0 12px; }
+    .hero-stats { gap: 24px; }
+    table { font-size: 0.82rem; }
+    td, thead th { padding: 10px 12px; }
+    .section-num { font-size: 2.5rem; }
+    .header-badge { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-top">
+    <div class="brand">
+      <div class="brand-icon">🐄</div>
+      <div class="brand-text">
+        <div class="brand-name">Tiwana Nutrition</div>
+        <div class="brand-sub">Dairy Farm Excellence</div>
+      </div>
+    </div>
+    <div class="header-badge">
+      पशु पोषण विशेषज्ञ<br>
+      <span style="font-size:0.65rem;opacity:0.7;">Professional Livestock Advisory</span>
+    </div>
+  </div>
+  <div class="header-hero">
+    <div class="hero-eyebrow">विशेषज्ञ मार्गदर्शिका</div>
+    <h1 class="hero-title">डेयरी फार्म की<br><span>समस्या निवारण गाइड</span></h1>
+    <p class="hero-desc">फार्म की आम समस्याओं के कारण, लक्षण और उनके व्यावसायिक समाधान — एक व्यापक संदर्भ पुस्तिका।</p>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">13</div><div class="stat-label">मुख्य समस्याएं</div></div>
+      <div class="stat"><div class="stat-num">80+</div><div class="stat-label">समाधान बिंदु</div></div>
+      <div class="stat"><div class="stat-num">100%</div><div class="stat-label">व्यावहारिक सलाह</div></div>
+    </div>
+  </div>
+</header>
+
+<nav id="mainNav">
+  <button class="nav-btn active" onclick="showSection(0)">1. फैट कम होना</button>
+  <button class="nav-btn" onclick="showSection(1)">2. SNF कम होना</button>
+  <button class="nav-btn" onclick="showSection(2)">3. दूध कम होना</button>
+  <button class="nav-btn" onclick="showSection(3)">4. Drymatter Intake</button>
+  <button class="nav-btn" onclick="showSection(4)">5. BCS स्कोर</button>
+  <button class="nav-btn" onclick="showSection(5)">6. गोबर चेक</button>
+  <button class="nav-btn" onclick="showSection(6)">7. खुरली &amp; फीड</button>
+  <button class="nav-btn" onclick="showSection(7)">8. वाटर टैंक</button>
+  <button class="nav-btn" onclick="showSection(8)">9. पिशाब</button>
+  <button class="nav-btn" onclick="showSection(9)">10. Bedding</button>
+  <button class="nav-btn" onclick="showSection(10)">11. Mastitis</button>
+  <button class="nav-btn" onclick="showSection(11)">12. लंगडापन</button>
+  <button class="nav-btn" onclick="showSection(12)">13. Repeat Breeding</button>
+</nav>
+
+<main>
+
+<!-- S1 -->
+<div class="section active" id="sec0">
+  <div class="section-header">
+    <div class="section-num">01</div>
+    <div class="section-meta">
+      <div class="section-title">दूध में फैट कम होना</div>
+      <div class="section-note">Pure HF गाय की Fat Range: 3.6 – 3.8 होती है</div>
+    </div>
+  </div>
+  <div class="table-card">
+    <div class="table-card-header"><div class="table-card-icon">🔍</div><div class="table-card-title">कारण, लक्षण और समाधान</div></div>
+    <table>
+      <thead><tr><th>कारण</th><th>लक्षण</th><th>हल</th></tr></thead>
+      <tbody>
+        <tr><td class="col-cause">फीड की मात्रा ज्यादा और चारे की मात्रा कम (खुराक का संतुलन सही नहीं)</td><td class="col-symptom">गोबर का पतला होना<br>जुगाली कम होना</td><td class="col-solution">फीड की मात्रा पशु के दूध के अनुसार देना</td></tr>
+        <tr><td class="col-cause">अनाज का ज्यादा खिलाना</td><td class="col-symptom">गोबर का पतला होना<br>जुगाली कम होना</td><td class="col-solution">अनाज नहीं खिलाना; खुराक को फीड के साथ <strong>Balance</strong> करना</td></tr>
+        <tr><td class="col-cause">चारे और फीड की <strong>Mixing</strong> नहीं करना</td><td class="col-symptom">केवल फीड को अलग करके खाना<br>जुगाली कम होना</td><td class="col-solution">चारे और फीड की <strong>Mixing</strong> सही करना</td></tr>
+        <tr><td class="col-cause">चारे और फीड का अचानक बदल देना</td><td class="col-symptom">गोबर का पतला होना<br>जुगाली कम होना</td><td class="col-solution">चारे और फीड को धीरे–धीरे बदलना</td></tr>
+        <tr><td class="col-cause">टोके का साईज छोटा होना</td><td class="col-symptom">जुगाली कम होना</td><td class="col-solution">चारे का साईज 0.75 से 1.5 इंच तक रखना</td></tr>
+        <tr><td class="col-cause">सर्दी का हरा चारा खिलाना</td><td class="col-symptom">गोबर का पतला होना<br>जुगाली कम होना</td><td class="col-solution">खुराक में भूसा की मात्रा ज्यादा होना<br>चारे को एक दिन पहले काट लो और दूसरे दिन खिलाना<br>खुराक में ऐनरजी की मात्रा फीड से पूरी करना</td></tr>
+        <tr><td class="col-cause">गाय का <strong>Comfort</strong></td><td class="col-symptom">ज्यादा से ज्यादा गाय खड़ी होना<br>जुगाली कम होना</td><td class="col-solution">गाय को <strong>Soft</strong> जगह पर ज्यादा से ज्यादा बिठाना<br>गाय को ज्यादा जगह प्रदान करना</td></tr>
+        <tr><td class="col-cause">गर्मी का बुरा प्रभाव</td><td class="col-symptom">जानवर का ज्यादा होकना और लार का ज्यादा निकलना<br>ज्यादा से ज्यादा गाय खड़ी होना और जुगाली कम होना</td><td class="col-solution">कच्ची जगह के ऊपर ज्यादा रखना, पंखे, <strong>Sprinkler and Fogger</strong> ज्यादा प्रदान करना</td></tr>
+        <tr><td class="col-cause">मछर और मक्खी का ज्यादा होना</td><td class="col-symptom">पशुओं का ज्यादा <strong>disturb</strong> होना और जुगाली कम होना</td><td class="col-solution">मछर और मक्खी को मछरदानी से रोकना<br><strong>Insect wire or fumigation</strong> का प्रयोग करना</td></tr>
+        <tr><td class="col-cause">दूध में पानी का मिलाना</td><td class="col-symptom">दूध का सैंपल फार्म से लेना</td><td class="col-solution">दूध की सही फेट BMC द्वारा चैंक करवाना</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- S2 -->
+<div class="section" id="sec1">
+  <div class="section-header">
+    <div class="section-num">02</div>
+    <div class="section-meta">
+      <div class="section-title">दूध में SNF की मात्रा का कम होना</div>
+      <div class="section-note">दूध में SNF की मात्रा 8.0 से 8.5 तक होती है</div>
+    </div>
+  </div>
+  <div class="table-card">
+    <div class="table-card-header"><div class="table-card-icon">🧪</div><div class="table-card-title">कारण, लक्षण और समाधान</div></div>
+    <table>
+      <thead><tr><th>कारण</th><th>लक्षण</th><th>हल</th></tr></thead>
+      <tbody>
+        <tr><td class="col-cause">खुराक में प्रोटीन की मात्रा का कम होना</td><td class="col-symptom">खुराक में भूसा की मात्रा ज्यादा, पक्की होई चरी, जवार और बाजरा खिलाना</td><td class="col-solution">खुराक में प्रोटीन की मात्रा को फीड से पूरी करना</td></tr>
+        <tr><td class="col-cause">खुराक में प्रोटीन की मात्रा का ज्यादा होना पर <strong>energy</strong> की मात्रा कम होना</td><td class="col-symptom">सरदी में बरसीन, जवी और <strong>Rye Grass</strong> का खिलाना</td><td class="col-solution">खुराक में <strong>energy</strong> की मात्रा फीड से पूरी करना</td></tr>
+        <tr><td class="col-cause">दूध में पानी का मिलाना</td><td class="col-symptom">दूध का सैंपल फार्म से लेना</td><td class="col-solution">दूध की सही SNF BMC द्वारा चेक करवाना</td></tr>
+        <tr><td class="col-cause">खुराक में फीड और <strong>Mineral</strong> की मात्रा कम होना</td><td class="col-symptom">—</td><td class="col-solution">खुराक में फीड और <strong>Mineral</strong> की मात्रा बढ़ाना</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- S3 -->
+<div class="section" id="sec2">
+  <div class="section-header">
+    <div class="section-num">03</div>
+    <div class="section-meta"><div class="section-title">दूध का कम होना</div></div>
+  </div>
+  <div class="table-card">
+    <div class="table-card-header"><div class="table-card-icon">🥛</div><div class="table-card-title">कारण, लक्षण और समाधान</div></div>
+    <table>
+      <thead><tr><th>कारण</th><th>लक्षण</th><th>हल</th></tr></thead>
+      <tbody>
+        <tr><td class="col-cause">कुदरती दूध का कम होना</td><td class="col-symptom">व्याना से 3 और 5 महीने बाद दूध की Production कम होती है</td><td class="col-solution">इस में कुछ नहीं करना</td></tr>
+        <tr><td class="col-cause">पानी का कम पीना</td><td class="col-symptom">पशु का खूटे के साथ बन्दा होना<br>फार्म में पानी की मात्रा कम होना (1 लीटर दूध के लिए 4-5 लीटर पानी जरूरी)</td><td class="col-solution">पशुओं को खुल्ला छोड़ना<br>पशुओं को फार्म में हर समय साफ और सुथरा पानी पिलाना चाहिए</td></tr>
+        <tr><td class="col-cause">अचानक खुराक का बदलना</td><td class="col-symptom">1. फीड का Trial लगाने के समय<br>2. अब वाले चारे का खत्म होना और अचानक नए चारे को खुराक में देना</td><td class="col-solution">1. धीरे–धीरे फीड को बदलना<br>2. नए चारे को अब वाले चारे साथ धीरे–धीरे बढ़ाना</td></tr>
+        <tr><td class="col-cause">खुराक का सही न होना और पशुओं को चारे के साथ गलत फीड देना</td><td class="col-symptom">1. सदी वाले चारे के साथ High protein feed खिलाना<br>2. किसान की फीड का अच्छी कुआलीटी का होना<br>3. खुराक में फीड का ज्यादा मात्रा में होना</td><td class="col-solution">1. चारे के अनुसार फीड को खिलाना<br>2. Trial से पहले किसान की फीड का जांच करवाना<br>3. फार्म में फीड की मात्रा कम करना</td></tr>
+        <tr><td class="col-cause">मौसम</td><td class="col-symptom">1. मई, जून में heat stress का होना<br>2. जुलाई महीने में मख्खी और मछर का ज्यादा होना<br>3. दिसंबर और जनवरी में ठंड ज्यादा होना<br>4. Off Season में चारे की कुआलीटी बुरी होना</td><td class="col-solution">1. Cooling Management को सही रखना<br>2. insect wire and fumigation का प्रयोग करना<br>3. Shed को कवर करना<br>4. Off Season के लिए चारे की पहले से planning करना</td></tr>
+        <tr><td class="col-cause">गाय का Comfort कम होना</td><td class="col-symptom">1. Heat stress<br>2. Hard bedding का होना<br>3. पशुओं की over crowding होना</td><td class="col-solution">1. फार्म से सही cooling system बनाना<br>2. गाय का comfort level soft bedding द्वारा बढ़ाना<br>3. पशुओं को ज्यादा जगह प्रदान करना</td></tr>
+        <tr><td class="col-cause">पशुओं की सेहत सही ना होना</td><td class="col-symptom">1. लम्बे समय से deworming न कराना<br>2. अभी जल्दी फार्म में vaccination का होना<br>3. पशुओं में sub clinical mastitis का होना</td><td class="col-solution">1. पशुओं की deworming करवाना<br>2. Recovery तक wait करना<br>3. डाक्टर की सलाह के साथ Antibiotic से treat करना</td></tr>
+        <tr><td class="col-cause">पशुओं का Heat में होना</td><td class="col-symptom">पशुओं द्वारा गर्मी के लक्षण दिखाना</td><td class="col-solution">किसान को सलाह दी जाती है कि गर्मी के बाद दूध का उतपादन आपने आप ही ज्यादा हो जायेगा</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- S4 -->
+<div class="section" id="sec3">
+  <div class="section-header">
+    <div class="section-num">04</div>
+    <div class="section-meta"><div class="section-title">Drymatter Intake कम होना</div></div>
+  </div>
+  <div class="table-card">
+    <div class="table-card-header"><div class="table-card-icon">🌾</div><div class="table-card-title">कारण, लक्षण और समाधान</div></div>
+    <table>
+      <thead><tr><th>कारण</th><th>लक्षण</th><th>हल</th></tr></thead>
+      <tbody>
+        <tr><td class="col-cause">पशुओं का खूटे के साथ बन्दा होना</td><td class="col-symptom">—</td><td class="col-solution">जानवरों को खुला छोड़ना</td></tr>
+        <tr><td class="col-cause">Feeding के कुछ समय बाद ही खुरली का खाली होना</td><td class="col-symptom">1. पशुओं की BCS बहुत कम होना<br>2. Feeding के बाद रूमेन फिल स्कोर 3 से 4 होना</td><td class="col-solution">1. खुराक में drymatter की मात्रा पशुओं की जरूरत अनुसार बढ़ाना<br>2. अगली feeding के समय 5% खुराक का बचना चाहिए</td></tr>
+        <tr><td class="col-cause">चारे और फीड की कुआलीटी का बुरा होना</td><td class="col-symptom">1. सुक्के और पक्के हुए चारे को खिलाना<br>2. अचार में उर्ली (फफूंद) का होना<br>3. फीड की कुआलीटी बुरी होना</td><td class="col-solution">1. हरे और अच्छी कुआलीटी का चारा खिलाना<br>2. अच्छी कुआलीटी की फीड (टिवाणा फीड) खिलाना</td></tr>
+        <tr><td class="col-cause">पशुओं की Deworming न होना / डाईरिया</td><td class="col-symptom">1. गोबर में Smell and mucus का होना<br>2. गोबर का पतला होना</td><td class="col-solution">1. फार्म में पशुओं की Deworming करवाना<br>2. डाक्टर की सलाह के साथ डाईरिया का इलाज करवाना</td></tr>
+        <tr><td class="col-cause">रुमेन ऐसीडोसिस</td><td class="col-symptom">1. गोबर का पतला होना<br>2. जुगाली कम होना</td><td class="col-solution">रुमेन ऐसीडोसिस को पशुओं में सही करना</td></tr>
+        <tr><td class="col-cause">फार्म में ओवर कराउडिंग का होना</td><td class="col-symptom">1. खुरली में एक ही समय पर सारे पशुओं द्वारा खुराक का न खा पाना<br>2. कुछ पशुओं में BCS का कम होना</td><td class="col-solution">Group में पशुओं की संख्या उनकी जगह के अनुसार रखना</td></tr>
+        <tr><td class="col-cause">पशुओं में Heat stress का होना</td><td class="col-symptom">होंकना, लार का गिरना और ज्यादा पशुओं का खड़े होना</td><td class="col-solution">1. फार्म में Shed, पंखे और Sprinkler का होना<br>2. छाया के नीचे soft बेडिंग देना<br>3. पूरे दिन की खुराक को 4 वार में खिलाना</td></tr>
+        <tr><td class="col-cause">ताजे व्याये हुए पशु</td><td class="col-symptom">BCS का तेजी से कम होना</td><td class="col-solution">ताजे व्याय हुए पशुओं को अलग Group में खिलाना</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- S5 -->
+<div class="section" id="sec4">
+  <div class="section-header">
+    <div class="section-num">05</div>
+    <div class="section-meta">
+      <div class="section-title">बाडी कंडीशन सकोर (BCS)</div>
+      <div class="section-note">गाँयों की BCS रेंज उनकी स्टेज के अनुसार 2.5 से 4.00 में होनी चाहिए</div>
+    </div>
+  </div>
+  <div class="table-card">
+    <div class="table-card-header"><div class="table-card-icon">📏</div><div class="table-card-title">पशुओं की स्टेज, लक्षण और समाधान</div></div>
+    <table>
+      <thead><tr><th>पशुओं की स्टेज</th><th>लक्षण</th><th>हल</th></tr></thead>
+      <tbody>
+        <tr><td class="col-cause">गायों को दूध से छोड़ने समय BCS रेंज 3 से 3.25 होनी चाहिए</td><td class="col-symptom">&gt;3.0–3.25</td><td class="col-solution">1. कुछ दिन के लिए खुराक में भूसा की मात्रा को बड़ाओ और फीड की मात्रा को कम करो<br>2. कुछ दिन खुराक में Choline कलोराईड खिलाओ</td></tr>
+        <tr><td class="col-cause">व्याने के समय BCS की रेंज 3.5 से 4.00 होनी चाहिए</td><td class="col-symptom">&lt;3.5 BCS: दूध का उतपादन कम होना, Reproduction का अच्छा नहीं होना<br><br>&gt;4.0 BCS: Rop and Dystocia के केश का बढ़ना, दूध का उतपादन कम होना</td><td class="col-solution">खुराक में T20 Dry Feed को बढ़ाना<br><br>खुराक में Feed की मात्रा कम नहीं करना</td></tr>
+        <tr><td class="col-cause">व्याने से 30 दिन बाद BCS की रेंज 2.75 से 3.00</td><td class="col-symptom">&lt;2.75 BCS:<br>1. Reproduction का कम होना<br>2. Ketosis का होना<br>3. अचानक दूध का कम होना</td><td class="col-solution">1. खुराक में T20 Fresher Feed खिलाना:<br>0-10 दिन: 6 किलो फीड<br>10-20 दिन: 8 किलो फीड<br>20-30 दिन: 10 किलो फीड<br><br>2. ताजा व्यायी गायों को comfort में रखना<br>3. ताजा व्यायी गायों को दूध वाली गायों के Group में नहीं डालना</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- S6 -->
+<div class="section" id="sec5">
+  <div class="section-header">
+    <div class="section-num">06</div>
+    <div class="section-meta">
+      <div class="section-title">गोबर चेक करना</div>
+      <div class="section-note">Normal गोबर 4 से 5 सेंटीमीटर की उचाई तक होना चाहिए और गोबर के बीच गड्डा होना चाहिए</div>
+    </div>
+  </div>
+  <div class="table-card">
+    <div class="table-card-header"><div class="table-card-icon">🔬</div><div class="table-card-title">लक्षण, कारण और समाधान</div></div>
+    <table>
+      <thead><tr><th>लक्षण</th><th>कारण</th><th>हल</th></tr></thead>
+      <tbody>
+        <tr><td class="col-symptom" rowspan="7">गोबर का पतला होना</td><td class="col-cause">खुराक में सर्दी वाले चारे की मात्रा ज्यादा होना</td><td class="col-solution">खुराक में भूसा की मात्रा बढ़ाना; चारे को एक दिन पहले काटना</td></tr>
+        <tr><td class="col-cause">खुराक में प्रोटीन की मात्रा ज्यादा और ऐनरजी की मात्रा कम</td><td class="col-solution">खुराक में प्रोटीन की ऐनरजी की मात्रा बढ़ाना</td></tr>
+        <tr><td class="col-cause">खुराक में अनाज ज्यादा खिलाना</td><td class="col-solution">खुराक में ज्यादा अनाज बंद करना</td></tr>
+        <tr><td class="col-cause">पशुओं की Deworming नहीं होना</td><td class="col-solution">पशुओं की Deworming करवाना</td></tr>
+        <tr><td class="col-cause">खुराक में फीड की मात्रा ज्यादा खिलाना</td><td class="col-solution">खुराक में फीड की मात्रा कम करना</td></tr>
+        <tr><td class="col-cause">चारे और फीड को मिक्स नहीं करना</td><td class="col-solution">चारे और फीड को हाथ से मिलाना</td></tr>
+        <tr><td class="col-cause">बैकटेरेयन इनफैकशन का होना</td><td class="col-solution">डाक्टर की सलाह के साथ Antibiotic treatment करवाना</td></tr>
+        <tr><td class="col-symptom" rowspan="5">गोबर का Hard होना</td><td class="col-cause">कम पानी पीना</td><td class="col-solution">पानी ज्यादा पिलाना</td></tr>
+        <tr><td class="col-cause">खुराक में प्रोटीन की मात्रा कम होना (चरी, जवार और भूसा ज्यादा खिलाना)</td><td class="col-solution">खुराक में प्रोटीन की मात्रा फीड के साथ बढ़ाना</td></tr>
+        <tr><td class="col-cause">पशु का लेट सूये में होना</td><td class="col-solution">—</td></tr>
+        <tr><td class="col-cause">खुराक में फीड की मात्रा कम होना</td><td class="col-solution">—</td></tr>
+        <tr><td class="col-cause">पक्के हुए चारे को खिलाना और कुतरे का साईज बड़ा होना</td><td class="col-solution">खुराक में प्रोटीन की मात्रा फीड के साथ बढ़ाना</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- S7 -->
+<div class="section" id="sec6">
+  <div class="section-header">
+    <div class="section-num">07</div>
+    <div class="section-meta">
+      <div class="section-title">खुरली और फीड स्टाल</div>
+      <div class="section-note">खुरली का निरीक्षण करके हमें फेट Depression or dry matter intake का पता चलता है</div>
+    </div>
+  </div>
+  <div class="table-card">
+    <div class="table-card-header"><div class="table-card-icon">🪣</div><div class="table-card-title">निरीक्षण, प्रभाव और समाधान</div></div>
+    <table>
+      <thead><tr><th>निरीक्षण</th><th>प्रभाव</th><th>हल</th></tr></thead>
+      <tbody>
+        <tr><td class="col-cause">खुरली का Feeding के बाद जल्दी खाली होना</td><td class="col-symptom">DMI कम होना<br>BCS कम होना<br>उतपादन का कम होना</td><td class="col-solution">खुराक का Dry matter बढ़ाना (फीड और चारे की मात्रा बढ़ाना)</td></tr>
+        <tr><td class="col-cause">खुराक में फीड छांट–छांट के खाना</td><td class="col-symptom">दूध की फैट का कम होना</td><td class="col-solution">खुराक में फीड और चारों को सही ढंग से मिलाना</td></tr>
+        <tr><td class="col-cause">खुरली से फीड का बाहर गिरना</td><td class="col-symptom">DMI कम होना</td><td class="col-solution">खुरली का साईज बढ़ाना</td></tr>
+        <tr><td class="col-cause">खुरली का गंदा होना, बीच दराड और खुखदरा होना</td><td class="col-symptom">पशुओं में Toxicity होना और immune system का कमजोर होना</td><td class="col-solution">खुरली को समय–समय पर सही ढंग के साथ साफ करना<br>खुरली को अंदर से smooth रखना</td></tr>
+        <tr><td class="col-cause">आईतकार या वरगाकार खुरली</td><td class="col-symptom">सफाई करते समय मुश्किल आना</td><td class="col-solution">खुरली की Dimension U shape रखना</td></tr>
+        <tr><td class="col-cause">खुरली की उचाई ज्यादा</td><td class="col-symptom">गायों का drymatter intake कम होना</td><td class="col-solution">खुरली की उचाई जमीन से 12 सेंटीमीटर पर रखना</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- S8 -->
+<div class="section" id="sec7">
+  <div class="section-header">
+    <div class="section-num">08</div>
+    <div class="section-meta"><div class="section-title">वाटर टैंक और वाटर का Intake</div></div>
+  </div>
+  <div class="table-card">
+    <div class="table-card-header"><div class="table-card-icon">💧</div><div class="table-card-title">निरीक्षण, प्रभाव और समाधान</div></div>
+    <table>
+      <thead><tr><th>निरीक्षण</th><th>प्रभाव</th><th>हल</th></tr></thead>
+      <tbody>
+        <tr><td class="col-cause">Absent (टैंक न होना)</td><td class="col-symptom">पानी कम पीना</td><td class="col-solution">वाटर टैंक की व्यवस्था करना</td></tr>
+        <tr><td class="col-cause">वाटर टैंक का गंदा होना, हरे रंग की काई लगना</td><td class="col-symptom">पानी कम पीना<br>पशुओं को toxicity होना</td><td class="col-solution">समय–समय पर वाटर टैंक को साफ करते रहना<br>चूने की coating करना</td></tr>
+        <tr><td class="col-cause">वाटर टैंक का आकार कम होना</td><td class="col-symptom">पानी का Intake पूरा ना होना</td><td class="col-solution">वाटर टैंक का आकार पशुओं की संख्या के अनुसार रखना</td></tr>
+        <tr><td class="col-cause">वाटर टैंक ज्यादा दूर होना</td><td class="col-symptom">पानी का Intake पूरा ना होना</td><td class="col-solution">पशुओं से वाटर टैंक की दूरी 15 मीटर से कम रखना</td></tr>
+        <tr><td class="col-cause">पानी का ज्यादा गरम और ज्यादा ठंडा होना</td><td class="col-symptom">पानी कम पीना</td><td class="col-solution">साफ और ताजा पानी पिलाना</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- S9 -->
+<div class="section" id="sec8">
+  <div class="section-header">
+    <div class="section-num">09</div>
+    <div class="section-meta"><div class="section-title">पिशाब करने के लक्षण और पिशाब का रंग</div></div>
+  </div>
+  <div class="table-card">
+    <div class="table-card-header"><div class="table-card-icon">🔎</div><div class="table-card-title">निरीक्षण, प्रभाव और समाधान</div></div>
+    <table>
+      <thead><tr><th>निरीक्षण</th><th>प्रभाव</th><th>हल</th></tr></thead>
+      <tbody>
+        <tr><td class="col-cause">रुक–रुक के पिशाब करना</td><td class="col-symptom">पानी कम पीना</td><td class="col-solution">साफ और ताजा पानी पिलाना</td></tr>
+        <tr><td class="col-cause">पिशाब का रंग पीला होना</td><td class="col-symptom">पानी कम पीना<br>खुराक में भूसे की मात्रा ज्यादा होना<br>खुराक में दवाई का मिला होना</td><td class="col-solution">खुराक में भूसा की मात्रा कम करना और फीड की मात्रा ज्यादा करना<br>कुछ नहीं करना</td></tr>
+        <tr><td class="col-cause">पिशाब का रंग लाल होना</td><td class="col-symptom">Babesiosis<br>पिशाब वाली थैली में infection होना<br>Phosphorus की कमी होना<br>सरसों का चारा खिलाना<br>एक साथ ज्यादा पानी पी लेना</td><td class="col-solution">डाक्टर की सलाह से ईलाज करवाना</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- S10 -->
+<div class="section" id="sec9">
+  <div class="section-header">
+    <div class="section-num">10</div>
+    <div class="section-meta"><div class="section-title">Bedding Material &amp; Over Crowding</div></div>
+  </div>
+  <div class="table-card">
+    <div class="table-card-header"><div class="table-card-icon">🏠</div><div class="table-card-title">10A — Bedding Material</div></div>
+    <table>
+      <thead><tr><th>निरीक्षण</th><th>प्रभाव</th><th>हल</th></tr></thead>
+      <tbody>
+        <tr><td class="col-cause">पक्की या कंकरीट की फरश</td><td class="col-symptom">जानवरों का कम बैठना और ज्यादा खड़े होना<br>जुगाली का कम होना<br>दूध की फेट का कम होना<br>पशुओं में लंगडापन आना<br>Mastitis का होना</td><td class="col-solution">फार्म में पशुओं के लिए Shed के नरम जगह का होना (मिट्टी, रेत और गढ़े)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="table-card">
+    <div class="table-card-header"><div class="table-card-icon">👥</div><div class="table-card-title">10B — Over Crowding</div></div>
+    <table>
+      <thead><tr><th>निरीक्षण</th><th>प्रभाव</th><th>हल</th></tr></thead>
+      <tbody>
+        <tr><td class="col-cause">पशुओं में competition का बढ़ना</td><td class="col-symptom">DMI का कम होना<br>पशुओं में चोट लगने का खतरा बढ़ना</td><td class="col-solution">Group में पशुओं की संख्या उनकी जगह के अनुसार रखना<br>2.5 फुट जगह दूध वाले पशुओं लिए<br>3 फुट जगह व्याने वाले पशुओं लिए</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- S11 -->
+<div class="section" id="sec10">
+  <div class="section-header">
+    <div class="section-num">11</div>
+    <div class="section-meta"><div class="section-title">Mastitis</div></div>
+  </div>
+  <div class="table-card">
+    <div class="table-card-header"><div class="table-card-icon">🏥</div><div class="table-card-title">निरीक्षण, प्रभाव और समाधान</div></div>
+    <table>
+      <thead><tr><th>निरीक्षण</th><th>प्रभाव</th><th>हल</th></tr></thead>
+      <tbody>
+        <tr><td class="col-cause">मौसम</td><td class="col-symptom">ज्यादा गर्मी, सर्दी और humidity का होना</td><td class="col-solution">पशुओं को खराब मौसम से बचाना</td></tr>
+        <tr><td class="col-cause">रख–रखाव</td><td class="col-symptom">फार्म में तंग जगह का होना<br>पशुओं को बांध के रखना</td><td class="col-solution">पशुओं को खुली जगह में रखना<br>ventilation का अच्छा होना<br>पशुओं को खुला रखना</td></tr>
+        <tr><td class="col-cause">Bedding</td><td class="col-symptom">पक्का और कंकरीट फर्श<br>bedding material का नहीं होना</td><td class="col-solution">पशुओं को कच्ची जगह में रखना (मिट्टी, रेत और गढ़े)</td></tr>
+        <tr><td class="col-cause">Excess Nitrozan and Protein</td><td class="col-symptom">खुराक में Nitrozan and Protein का ज्यादा होना<br>high protein and high moisture वाले चारे को अचानक खिलाना (बरसीम, राई घास और मटर का छिलका)</td><td class="col-solution">खुराक में ज्यादा प्रोटीन को ऐनजी के साथ Balance करना</td></tr>
+        <tr><td class="col-cause">अचार (Silage)</td><td class="col-symptom">अचार में उर्ली का लगा होना (फफूंदी की वजह से immune system कमजोर हो जाता है)</td><td class="col-solution">पशुओं को उर्ली वाला अचार नहीं खिलाना चाहिए</td></tr>
+        <tr><td class="col-cause">रुमेन ऐसीडोसिस</td><td class="col-symptom">रुमेन ऐसीडोसिस immune system को कमजोर कर देता है जिस की वजह से पशुओं को mastitis हो जाती है</td><td class="col-solution">पशुओं में रुमेन ऐसीडोसिस होने से बचाना चाहिए</td></tr>
+        <tr><td class="col-cause">फार्म में साफ सफाई</td><td class="col-symptom">फार्म में bedding material and milking मशीन की साफ सफाई न होने पर पशुओं में mastitis की समस्या हो जाती है</td><td class="col-solution">फार्म में सही ढंग से साफ सफाई रखो</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="section-header" style="margin-top:40px;border-top:1px solid var(--border);padding-top:24px;border-bottom:none;margin-bottom:0;">
+    <div class="section-meta">
+      <div class="section-title" style="font-size:1.3rem;">Management द्वारा Mastitis को रोकने के 10 उपाय</div>
+    </div>
+  </div>
+  <div class="steps-grid">
+    <div class="step-card"><div class="step-num">1</div><div class="step-text">Predip and Postdip</div></div>
+    <div class="step-card"><div class="step-num">2</div><div class="step-text">सही ढंग के साथ पशुओं की पूरी Milking करना</div></div>
+    <div class="step-card"><div class="step-num">3</div><div class="step-text">Milking Machine की साफ सफाई और प्रैशर का सही होना</div></div>
+    <div class="step-card"><div class="step-num">4</div><div class="step-text">Milking Machine की सही ढंग के साथ लगाना और हटाना</div></div>
+    <div class="step-card"><div class="step-num">5</div><div class="step-text">पशुओं का mastitis सकोर चेक करना, फिर कलीनीकल mastitis वाले पशुओं को अलग करके उनका ईलाज करना</div></div>
+    <div class="step-card"><div class="step-num">6</div><div class="step-text">ईलाज के दौरान पशुओं को फीड कम खिलाना</div></div>
+    <div class="step-card"><div class="step-num">7</div><div class="step-text">Milking के बाद पशु को चारा और फीड खिलाना</div></div>
+    <div class="step-card"><div class="step-num">8</div><div class="step-text">गाय की साफ सफाई ज्यादा रखना</div></div>
+    <div class="step-card"><div class="step-num">9</div><div class="step-text">फार्म की साफ सफाई ज्यादा रखना</div></div>
+    <div class="step-card"><div class="step-num">10</div><div class="step-text">Dry Cow Therapy</div></div>
+  </div>
+</div>
+
+<!-- S12 -->
+<div class="section" id="sec11">
+  <div class="section-header">
+    <div class="section-num">12</div>
+    <div class="section-meta">
+      <div class="section-title">गाय में लंगडापन (Locomotion)</div>
+      <div class="section-note">Locomotion सकोर कार्ड की रेंज 1 से 5 तक होती है</div>
+    </div>
+  </div>
+  <div class="table-card">
+    <div class="table-card-header"><div class="table-card-icon">🦶</div><div class="table-card-title">कंडीशन, कारण और समाधान</div></div>
+    <table>
+      <thead><tr><th>कंडीशन</th><th>कारण</th><th>हल</th></tr></thead>
+      <tbody>
+        <tr><td class="col-cause">गाँय का housing management का सही न होना</td><td class="col-symptom">पशुओं का बंधा होना<br>पक्की और कंकरीट फर्श होना (white line disease and SOLEULCER)</td><td class="col-solution">पशुओं को खुले छोड़ना<br>पशुओं को कच्ची जगह में रखना</td></tr>
+        <tr><td class="col-cause">वातावरण संबधी कारण</td><td class="col-symptom">1. गर्मी के तनाव के कारण पशुओं को ज्यादा खड़े होना जिस के कारण पशुओं में लंगडापन आ जाता है<br>2. फार्म में साफ सफाई का कम होना (Foot Rot की बिमारी)<br>3. खुरा की लम्बे समय से trimming न करना (खुरा का बड़ा होना)</td><td class="col-solution">1. फार्म में छेड के नीचे कच्ची जगह में पशुओं को ज्यादा से ज्यादा बिठाना<br>2. फार्म में साफ सफाई रखना; foot bath की विवस्था (2% copper sulfare solution)<br>3. समय–समय पर खुरा की trimming करना</td></tr>
+        <tr><td class="col-cause">रुमेन ऐसीडोसिस के कारण Laminitis की बिमारी का होना</td><td class="col-symptom">1. खुराक में फीड और अनाज की मात्रा बड़ जाना<br>2. चारे और फीड का मिक्स न होना<br>3. आचार के साथ मीठा सोडा न होना<br>4. चारे का कुतरा छोटा होना</td><td class="col-solution">1. फीड और चारे का Balance होना और खुराक में ज्यादा अनाज न खिलाना<br>2. चारे और फीड को अच्छी तरह से मिक्स करना<br>3. आचार के साथ मीठा सोडा होना<br>4. चारे का कुतरा 0.75–1.5 ईंच रखना<br>(Acute Laminitis: डाक्टर की सलाह से ईलाज करवाना)</td></tr>
+        <tr><td class="col-cause">खुराक में Mineral की कमी होना</td><td class="col-symptom">Zinc, Copper, Mn, Co and Biotin की कमी होना</td><td class="col-solution">खुराक में Mineral की मात्रा पूरी करना</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- S13 -->
+<div class="section" id="sec12">
+  <div class="section-header">
+    <div class="section-num">13</div>
+    <div class="section-meta"><div class="section-title">Repeat Breeding Syndrome</div></div>
+  </div>
+  <div class="table-card">
+    <div class="table-card-header"><div class="table-card-icon">🔄</div><div class="table-card-title">कंडीशन, कारण और समाधान</div></div>
+    <table>
+      <thead><tr><th>कंडीशन</th><th>कारण</th><th>हल</th></tr></thead>
+      <tbody>
+        <tr><td class="col-cause">Malefactor</td><td class="col-symptom">Semen की कुआलीटी घटिया होना<br>a) Infected Semen<br>b) Dead Semen</td><td class="col-solution">Semen की कुआलीटी चेक करना<br>Bull का टैस्ट करवाना</td></tr>
+        <tr><td class="col-cause">Human Factor</td><td class="col-symptom">1. Semen का Collection and storage सही तरीके के साथ न करना<br>2. A.I. technique का सही न होना<br>3. पशुओं में Heat पता न लगना<br>4. Standing Heat के लक्षण: Glassy, Ropy, Stringy</td><td class="col-solution">1. Semen storage container में गैस का Level सही रखना<br>2. A.I. technique का सही होना<br>3. पशुओं में सही Heat पता लगाना और A.I. की Timing को सही रखना<br>4. Standing Heat में पशुओं की A.I. करना (Heat शुरू होने के 12 से 16 घंटे के बीच होती है)</td></tr>
+        <tr><td class="col-cause">Female Factor</td><td class="col-symptom">1. Ovulation का सही न होना या लेट होना<br>2. हारमोन के बैलेंस का सही न होना (Long heat)<br>3. गाय की बच्चेदानी में कमी होना:<br>a) बच्चेदानी में infection होना<br>b) बच्चेदानी का hard होना<br>c) बच्चेदानी का मूड़ा होना</td><td class="col-solution">1. इन पशुओं की फार्म में छांटी करनी<br>2. डाक्टर की सलाह के साथ हारमोन का ईलाज करवाना<br>3. डाक्टर की सलाह के साथ बच्चेदानी की सफाई करवाना<br>4. Bull द्वारा गाय को आस लगवाना</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <strong style="color:var(--gold);font-family:'Playfair Display',serif;font-size:1.1rem;">Tiwana Nutrition</strong><br>
+  <span>डेयरी फार्म विशेषज्ञ सलाह — Professional Livestock Nutrition Advisory</span><br>
+  <span style="opacity:0.4;font-size:0.72rem;margin-top:6px;display:block;">यह गाइड शैक्षिक उद्देश्यों के लिए है। गंभीर बीमारी की स्थिति में पशु चिकित्सक से सलाह लें।</span>
+</footer>
+
+<script>
+  function showSection(idx) {
+    document.querySelectorAll('.section').forEach((s,i) => s.classList.toggle('active', i===idx));
+    document.querySelectorAll('.nav-btn').forEach((b,i) => b.classList.toggle('active', i===idx));
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+</script>
+</body>
+</html>
