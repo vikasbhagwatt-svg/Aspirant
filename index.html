@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>मुखर्जी नगर रेडियो — गाने जो हर रात कमरे में बजते हैं</title>
+<meta name="description" content="A live radio for exam aspirants — Aspirants OST, study motivation and Jagjit Singh / Nusrat Fateh Ali Khan ghazals, streamed live, kept honest to the hour it actually is in India.">
+<meta name="theme-color" content="#0C0906">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Tiro+Devanagari+Hindi:ital@0;1&family=Baloo+2:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg0:#0A0704;
+    --bg1:#120D08;
+    --bg2:#1B140C;
+    --amber:#E7A13B;
+    --amber-soft:#F2C784;
+    --amber-dim:#8A6A3A;
+    --paper:#EFE7D8;
+    --paper-dim:#AFA48F;
+    --rust:#BD4B2A;
+    --line: rgba(239,231,216,0.12);
+    --line-soft: rgba(239,231,216,0.06);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:
+      radial-gradient(1200px 500px at 15% -10%, rgba(231,161,59,.06), transparent 60%),
+      var(--bg1);
+    color:var(--paper);
+    font-family:'Inter',sans-serif;
+    overflow-x:hidden;
+    padding-bottom:92px;
+  }
+  ::selection{background:var(--amber); color:#140E04;}
+  a{color:inherit;}
+  button{font-family:inherit;}
+
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    letter-spacing:.14em; text-transform:uppercase; font-size:.66rem;
+    color:var(--amber-soft); display:flex; align-items:center; gap:.6em;
+  }
+  .eyebrow .live-dot{width:6px;height:6px;border-radius:50%;background:var(--rust); box-shadow:0 0 8px var(--rust); animation:pulse 1.8s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.35;}}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky; top:0; z-index:40;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:15px 5vw;
+    background:linear-gradient(180deg, rgba(10,7,4,.94), rgba(10,7,4,.8));
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line-soft);
+  }
+  .brand{font-family:'Baloo 2',sans-serif; font-weight:700; font-size:1.05rem;}
+  .brand span{color:var(--amber);}
+  .navlinks{display:flex; gap:24px; font-size:.78rem; font-family:'IBM Plex Mono',monospace;}
+  .navlinks a{opacity:.7; text-decoration:none;}
+  .navlinks a:hover{opacity:1; color:var(--amber-soft);}
+  .nav-ist{font-family:'IBM Plex Mono',monospace; font-size:.72rem; color:var(--paper-dim);}
+  @media(max-width:680px){.navlinks{display:none;}}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative; min-height:92vh;
+    display:flex; flex-direction:column; justify-content:flex-end;
+    padding:8vh 6vw 6vh;
+    background:linear-gradient(180deg, var(--bg0) 0%, #0D0A06 55%, var(--bg2) 100%);
+    overflow:hidden;
+  }
+  .stars{position:absolute; inset:0; z-index:0;}
+  .star{position:absolute; width:2px; height:2px; background:#fff; border-radius:50%; opacity:.45; animation:tw 4s ease-in-out infinite;}
+  @keyframes tw{0%,100%{opacity:.12;}50%{opacity:.8;}}
+  .moon{
+    position:absolute; top:8%; right:9%; width:72px; height:72px; border-radius:50%;
+    background:radial-gradient(circle at 35% 35%, #FFF3D9, var(--amber-soft) 60%, var(--amber) 100%);
+    box-shadow:0 0 60px 16px rgba(231,161,59,.3); z-index:1;
+  }
+  .skyline{position:absolute; left:0; right:0; bottom:0; z-index:1; line-height:0;}
+  .skyline svg{display:block; width:100%; height:auto;}
+  .grain{
+    position:absolute; inset:0; z-index:5; pointer-events:none; opacity:.05; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .hero-inner{position:relative; z-index:3; max-width:920px;}
+  .hero .eyebrow{margin-bottom:24px;}
+  .hero h1{
+    font-family:'Tiro Devanagari Hindi','Fraunces',serif; font-weight:400;
+    font-size:clamp(1.55rem, 4.2vw, 2.7rem); line-height:1.55; max-width:17ch;
+  }
+  .hero h1 .hi-alt{
+    display:block; font-family:'Fraunces',serif; font-style:italic; font-weight:500;
+    font-size:.48em; color:var(--amber-soft); margin-top:16px; letter-spacing:.01em; max-width:38ch;
+  }
+  .hero p.sub{margin-top:22px; max-width:54ch; color:var(--paper-dim); font-size:.96rem; line-height:1.75;}
+  .hero-cta{display:flex; gap:14px; margin-top:32px; flex-wrap:wrap;}
+  .btn{
+    font-family:'IBM Plex Mono',monospace; font-size:.8rem; letter-spacing:.02em;
+    padding:13px 22px; border-radius:3px; text-decoration:none; cursor:pointer;
+    border:1px solid var(--line); display:inline-flex; align-items:center; gap:10px;
+    background:transparent; color:var(--paper); transition:.2s;
+  }
+  .btn.primary{background:var(--amber); color:#140E04; border-color:var(--amber); font-weight:600;}
+  .btn.primary:hover{background:var(--amber-soft);}
+  .btn:hover{border-color:var(--amber-soft); color:var(--amber-soft);}
+
+  /* ---------- INTRO ---------- */
+  .intro{
+    padding:72px 6vw; max-width:1120px; margin:0 auto;
+    display:grid; grid-template-columns:1.05fr 1.4fr; gap:60px;
+    border-bottom:1px solid var(--line-soft);
+  }
+  @media(max-width:800px){.intro{grid-template-columns:1fr; gap:24px;}}
+  .intro h2{font-family:'Fraunces',serif; font-weight:500; font-style:italic; font-size:1.5rem; color:var(--amber-soft);}
+  .intro p{color:var(--paper-dim); line-height:1.8; font-size:.94rem;}
+  .intro p + p{margin-top:14px;}
+
+  /* ---------- ROTATIONS OVERVIEW ---------- */
+  .rotations{padding:0 6vw 70px; max-width:1120px; margin:0 auto;}
+  .rotations h2{font-family:'Fraunces',serif; font-weight:500; font-size:1.5rem; margin-bottom:26px;}
+  .rot-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:6px; overflow:hidden;}
+  @media(max-width:900px){.rot-grid{grid-template-columns:repeat(2,1fr);}}
+  .rot-card{background:var(--bg1); padding:22px 18px; cursor:pointer; transition:.2s;}
+  .rot-card:hover{background:var(--bg2);}
+  .rot-card.on-air{background:linear-gradient(160deg, rgba(231,161,59,.14), var(--bg1));}
+  .rot-card .time{font-family:'IBM Plex Mono',monospace; font-size:.68rem; color:var(--paper-dim); margin-bottom:10px;}
+  .rot-card.on-air .time{color:var(--amber-soft);}
+  .rot-card h3{font-family:'Baloo 2',sans-serif; font-size:1rem; margin-bottom:4px;}
+  .rot-card p{color:var(--paper-dim); font-size:.78rem; line-height:1.5;}
+  .rot-card .badge{display:inline-block; margin-top:12px; font-family:'IBM Plex Mono',monospace; font-size:.62rem; letter-spacing:.05em; color:var(--rust);}
+
+  /* ---------- STATION SECTIONS ---------- */
+  .rail{padding:60px 6vw 20px; max-width:1120px; margin:0 auto;}
+  .rail-head{display:flex; align-items:baseline; justify-content:space-between; margin-bottom:28px; flex-wrap:wrap; gap:10px;}
+  .rail-head h2{font-family:'Fraunces',serif; font-weight:500; font-size:1.6rem;}
+  .rail-head .count{font-family:'IBM Plex Mono',monospace; font-size:.74rem; color:var(--paper-dim);}
+
+  .station{
+    display:grid; grid-template-columns:320px 1fr; gap:34px;
+    background:linear-gradient(160deg, rgba(255,255,255,.025), rgba(255,255,255,0));
+    border:1px solid var(--line); border-radius:6px; padding:26px;
+  }
+  @media(max-width:760px){.station{grid-template-columns:1fr;}}
+
+  .poster{
+    position:relative; aspect-ratio:1/1; border-radius:4px; overflow:hidden;
+    display:flex; align-items:center; justify-content:center; cursor:pointer;
+    border:1px solid var(--line);
+  }
+  .poster .bg{position:absolute; inset:0;}
+  .poster .playbtn{
+    position:relative; z-index:2; width:62px; height:62px; border-radius:50%;
+    background:rgba(10,7,4,.55); border:1.5px solid var(--amber-soft);
+    display:flex; align-items:center; justify-content:center; backdrop-filter:blur(3px);
+    transition:.2s;
+  }
+  .poster:hover .playbtn{background:var(--amber); border-color:var(--amber); transform:scale(1.05);}
+  .poster .playbtn svg{width:20px; height:20px; fill:var(--amber-soft); margin-left:3px;}
+  .poster:hover .playbtn svg{fill:#140E04;}
+  .poster .label{position:absolute; bottom:12px; left:14px; z-index:2; font-family:'IBM Plex Mono',monospace; font-size:.68rem; color:var(--paper-dim);}
+
+  .station-info h3{font-family:'Baloo 2',sans-serif; font-size:1.3rem; margin-bottom:10px;}
+  .station-info p{color:var(--paper-dim); font-size:.9rem; line-height:1.75; max-width:58ch; margin-bottom:16px;}
+  .track-shelf{display:flex; flex-direction:column; border-top:1px solid var(--line);}
+  .track{
+    display:flex; align-items:center; gap:14px; padding:11px 4px;
+    border-bottom:1px solid var(--line); font-size:.87rem; text-decoration:none; color:var(--paper);
+  }
+  .track:hover{color:var(--amber-soft);}
+  .track .n{font-family:'IBM Plex Mono',monospace; color:var(--paper-dim); font-size:.74rem; width:20px;}
+  .track .t{flex:1;}
+  .track .t small{display:block; color:var(--paper-dim); font-size:.74rem; margin-top:2px;}
+  .track .dur{font-family:'IBM Plex Mono',monospace; font-size:.72rem; color:var(--paper-dim);}
+
+  .open-full{
+    margin-top:16px; display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:.76rem;
+    color:var(--amber-soft); text-decoration:none; border-bottom:1px dotted var(--amber-soft); padding-bottom:2px;
+  }
+
+  /* ---------- QUOTE STRIP ---------- */
+  .quote-strip{margin:90px 6vw; padding:50px 6vw; text-align:center; border-top:1px solid var(--line-soft); border-bottom:1px solid var(--line-soft);}
+  .quote-strip p{font-family:'Fraunces',serif; font-style:italic; font-weight:500; font-size:clamp(1.05rem,2.2vw,1.4rem); max-width:26ch; margin:0 auto; line-height:1.6; color:var(--amber-soft);}
+  .quote-strip span{display:block; margin-top:14px; font-family:'IBM Plex Mono',monospace; font-size:.7rem; color:var(--paper-dim); letter-spacing:.05em;}
+
+  /* ---------- FOOTER ---------- */
+  footer{padding:60px 6vw 40px; border-top:1px solid var(--line-soft); font-size:.82rem; color:var(--paper-dim); max-width:1120px; margin:0 auto;}
+  footer .brand{margin-bottom:14px; display:block;}
+  .foot-links{display:flex; gap:20px; flex-wrap:wrap; margin-top:18px; font-family:'IBM Plex Mono',monospace; font-size:.74rem;}
+  .foot-links a{text-decoration:none; opacity:.7;}
+  .foot-links a:hover{opacity:1; color:var(--amber-soft);}
+  footer .legal{margin-top:26px; line-height:1.7; max-width:72ch; font-size:.74rem; opacity:.65;}
+
+  /* ---------- MP3-STYLE STICKY PLAYER ---------- */
+  .player-bar{
+    position:fixed; left:0; right:0; bottom:0; z-index:50;
+    background:rgba(9,6,3,.96); backdrop-filter:blur(12px);
+    border-top:1px solid var(--line);
+    transform:translateY(100%); transition:transform .35s ease;
+  }
+  .player-bar.show{transform:translateY(0);}
+  .pb-progress-row{display:flex; align-items:center; gap:10px; padding:8px 5vw 0; font-family:'IBM Plex Mono',monospace; font-size:.66rem; color:var(--paper-dim);}
+  .pb-progress-row input[type=range]{
+    flex:1; -webkit-appearance:none; appearance:none; height:3px; background:var(--line); border-radius:2px; outline:none; cursor:pointer;
+  }
+  .pb-progress-row input[type=range]::-webkit-slider-thumb{-webkit-appearance:none; width:11px; height:11px; border-radius:50%; background:var(--amber); cursor:pointer;}
+  .pb-progress-row input[type=range]::-moz-range-thumb{width:11px; height:11px; border-radius:50%; background:var(--amber); border:none; cursor:pointer;}
+  .pb-progress-row .fill-track{position:relative; flex:1;}
+
+  .player-bar-main{display:flex; align-items:center; gap:16px; padding:10px 5vw 14px;}
+  .pb-controls{display:flex; align-items:center; gap:8px; flex-shrink:0;}
+  .pb-controls button{
+    background:none; border:none; cursor:pointer; color:var(--paper); opacity:.85;
+    display:flex; align-items:center; justify-content:center; padding:6px;
+  }
+  .pb-controls button:hover{opacity:1; color:var(--amber-soft);}
+  .pb-controls svg{width:17px; height:17px; fill:currentColor;}
+  .pb-play{
+    width:36px; height:36px; border-radius:50%; background:var(--amber) !important; flex-shrink:0;
+  }
+  .pb-play svg{fill:#140E04 !important; width:14px; height:14px;}
+  .pb-play:hover{background:var(--amber-soft) !important;}
+
+  .pb-meta{overflow:hidden; flex:1; min-width:0;}
+  .pb-meta .pb-station{font-family:'IBM Plex Mono',monospace; font-size:.64rem; color:var(--amber-soft); text-transform:uppercase; letter-spacing:.08em; margin-bottom:2px;}
+  .pb-meta .pb-title{font-size:.86rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:var(--paper);}
+  .pb-close{background:none; border:none; color:var(--paper-dim); cursor:pointer; font-size:1rem; flex-shrink:0; padding:6px;}
+  .pb-close:hover{color:var(--amber-soft);}
+
+  #ytHost{position:absolute; width:1px; height:1px; overflow:hidden; opacity:0; pointer-events:none; bottom:0; left:0;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">मुखर्जी नगर <span>रेडियो</span></div>
+  <div class="navlinks">
+    <a href="#aspirants">Aspirants OST</a>
+    <a href="#motivation">मोटिवेशन</a>
+    <a href="#ghazal">ग़ज़ल</a>
+    <a href="#sufi">सूफ़ी</a>
+  </div>
+  <div class="nav-ist" id="istClock">-- IST</div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="stars" id="stars"></div>
+  <div class="moon"></div>
+  <div class="grain"></div>
+
+  <div class="skyline">
+    <svg viewBox="0 0 1440 340" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <g fill="#171008">
+        <rect x="0" y="150" width="90" height="190"/><rect x="95" y="120" width="70" height="220"/>
+        <rect x="170" y="170" width="110" height="170"/><rect x="285" y="100" width="60" height="240"/>
+        <rect x="350" y="160" width="100" height="180"/><rect x="455" y="130" width="80" height="210"/>
+        <rect x="540" y="180" width="130" height="160"/><rect x="675" y="110" width="70" height="230"/>
+        <rect x="750" y="150" width="95" height="190"/><rect x="850" y="170" width="115" height="170"/>
+        <rect x="970" y="120" width="65" height="220"/><rect x="1040" y="165" width="100" height="175"/>
+        <rect x="1145" y="135" width="80" height="205"/><rect x="1230" y="175" width="120" height="165"/>
+        <rect x="1355" y="150" width="85" height="190"/>
+      </g>
+      <g fill="#F2C784" opacity="0.7">
+        <rect x="12" y="175" width="7" height="9"/><rect x="30" y="200" width="7" height="9"/>
+        <rect x="60" y="230" width="7" height="9"/><rect x="112" y="150" width="7" height="9"/>
+        <rect x="135" y="190" width="7" height="9"/><rect x="190" y="200" width="7" height="9"/>
+        <rect x="225" y="230" width="7" height="9"/><rect x="300" y="140" width="7" height="9"/>
+        <rect x="315" y="180" width="7" height="9"/><rect x="370" y="200" width="7" height="9"/>
+        <rect x="480" y="160" width="7" height="9"/><rect x="500" y="200" width="7" height="9"/>
+        <rect x="565" y="220" width="7" height="9"/><rect x="695" y="150" width="7" height="9"/>
+        <rect x="770" y="190" width="7" height="9"/><rect x="870" y="210" width="7" height="9"/>
+        <rect x="990" y="160" width="7" height="9"/><rect x="1060" y="200" width="7" height="9"/>
+        <rect x="1165" y="170" width="7" height="9"/><rect x="1255" y="210" width="7" height="9"/>
+        <rect x="1370" y="185" width="7" height="9"/>
+      </g>
+      <g fill="#BD4B2A" opacity="0.85">
+        <rect x="175" y="150" width="100" height="16" rx="2"/>
+        <rect x="855" y="150" width="105" height="16" rx="2"/>
+        <rect x="1150" y="118" width="70" height="14" rx="2"/>
+      </g>
+      <path d="M0,340 L0,300 Q120,260 260,300 Q420,340 600,290 Q800,240 980,300 Q1180,350 1440,290 L1440,340 Z" fill="#0A0704"/>
+      <g><rect x="198" y="230" width="4" height="110" fill="#0d0a05"/>
+        <circle cx="200" cy="228" r="9" fill="#F2C784"/><circle cx="200" cy="228" r="20" fill="#F2C784" opacity="0.16"/></g>
+      <g fill="#0d0a05"><circle cx="240" cy="300" r="6"/><rect x="235" y="306" width="10" height="22" rx="3"/><rect x="228" y="312" width="8" height="14" rx="2"/></g>
+    </svg>
+  </div>
+
+  <div class="hero-inner">
+    <div class="eyebrow"><span class="live-dot"></span> Live from Mukherjee Nagar · <span id="onAirLabel">लोड हो रहा है…</span></div>
+    <h1>
+      ठंडी रात, थकी आँखें, अकेला कमरा —
+      फिर भी सुबह उठकर एक बार और पढ़ना है।
+      <span class="hi-alt">Every aspirant's room here has played this exact feeling on repeat. This station just gives it a soundtrack — kept honest to the hour it actually is in India.</span>
+    </h1>
+    <p class="sub">UPSC, SSC, banking, defence, judiciary — whatever you're grinding through. Aspirants' own web-series soundtrack leads the rotation, then the songs that pull you back to the desk, then the ghazals and qawwalis — Jagjit Singh, Nusrat Fateh Ali Khan, Ghulam Ali, Pankaj Udhas — that play once the lights actually go off.</p>
+    <div class="hero-cta">
+      <button class="btn primary" onclick="playStation('aspirants')">▶ Press play — Aspirants OST</button>
+      <a class="btn" href="#ghazal">Skip to ग़ज़ल →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INTRO ============ -->
+<section class="intro" id="about">
+  <h2>"रूम नं. 02, तीसरी मंज़िल" जैसा एक रेडियो।</h2>
+  <div>
+    <p>Old Rajinder Nagar and Mukherjee Nagar run on the same three sounds after 11pm: someone's phone playing the <em>Aspirants</em> theme through a cracked speaker, a senior's motivational reel bleeding through the wall, and — once the lights actually go off — a ghazal from someone's father's era, because that's the only thing that helps you fall asleep with tomorrow's target list still open.</p>
+    <p>Everything here streams straight off YouTube through real public playlists — nothing re-hosted, no MP3 downloads, so the artists and labels still get the play. Tap a rotation, hit play, and get back to your notes.</p>
+  </div>
+</section>
+
+<!-- ============ ROTATIONS OVERVIEW ============ -->
+<section class="rotations">
+  <h2>चार रोटेशन — one per part of the day</h2>
+  <div class="rot-grid">
+    <div class="rot-card" id="rc-ghazal" onclick="playStation('ghazal')">
+      <div class="time">22:00–05:00 IST</div>
+      <h3>ग़ज़ल की रात</h3>
+      <p>Jagjit Singh, Ghulam Ali, Pankaj Udhas — once the lights go off.</p>
+      <span class="badge">ON AIR</span>
+    </div>
+    <div class="rot-card" id="rc-motivation" onclick="playStation('motivation')">
+      <div class="time">05:00–10:00 IST</div>
+      <h3>सुबह की शुरुआत</h3>
+      <p>The songs that get you out of bed before the library opens.</p>
+      <span class="badge">ON AIR</span>
+    </div>
+    <div class="rot-card" id="rc-aspirants" onclick="playStation('aspirants')">
+      <div class="time">10:00–22:00 IST</div>
+      <h3>लाइब्रेरी ऑवर्स</h3>
+      <p>Aspirants OST — the default rotation, priority all day.</p>
+      <span class="badge">ON AIR</span>
+    </div>
+    <div class="rot-card" id="rc-sufi" onclick="playStation('sufi')">
+      <div class="time">always on</div>
+      <h3>सूफ़ी रात</h3>
+      <p>Nusrat Fateh Ali Khan qawwalis, whenever you need them.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ASPIRANTS OST ============ -->
+<section class="rail" id="aspirants">
+  <div class="rail-head">
+    <h2>01 — Aspirants, the soundtrack</h2>
+    <div class="count">TVF · 40 tracks in rotation · priority station</div>
+  </div>
+  <div class="station">
+    <div class="poster" id="poster-aspirants" onclick="playStation('aspirants')">
+      <div class="bg" style="background:linear-gradient(160deg,#241809,#402c12 70%);"></div>
+      <div class="playbtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      <div class="label">TAP TO PLAY</div>
+    </div>
+    <div class="station-info">
+      <h3>De Mauka Zindagi, Bairagi, Dhaaga &amp; the rest</h3>
+      <p>The scored soundtrack of TVF's <em>Aspirants</em> — Tusshar Mallek, Nilotpal Bora, Rohit Sharma and others — the closest thing this generation has to an official Mukherjee Nagar anthem.</p>
+      <div class="track-shelf" id="shelf-aspirants"></div>
+      <a class="open-full" href="https://www.youtube.com/playlist?list=PLVWtdc2bihyzIrWaFMaMwM2VBweSaWpuo" target="_blank" rel="noopener">Open the full collection on YouTube →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MOTIVATION ============ -->
+<section class="rail" id="motivation">
+  <div class="rail-head">
+    <h2>02 — डेस्क पर वापस जाने वाले गाने</h2>
+    <div class="count">Study motivation · 272 tracks in rotation</div>
+  </div>
+  <div class="station">
+    <div class="poster" id="poster-motivation" onclick="playStation('motivation')">
+      <div class="bg" style="background:linear-gradient(160deg,#2a1c0c,#402c12 70%);"></div>
+      <div class="playbtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      <div class="label">TAP TO PLAY</div>
+    </div>
+    <div class="station-info">
+      <h3>For 2am, one more revision left</h3>
+      <p>Bollywood's studying-and-struggling canon — the songs every aspirant's WhatsApp status has quoted at some point.</p>
+      <div class="track-shelf" id="shelf-motivation"></div>
+      <a class="open-full" href="https://www.youtube.com/playlist?list=PL6g7bVmaKA0QGxDAVmOnM7IbMc5kef86v" target="_blank" rel="noopener">Open the full playlist on YouTube →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GHAZAL ============ -->
+<section class="rail" id="ghazal">
+  <div class="rail-head">
+    <h2>03 — रौशनी बुझने के बाद की ग़ज़ल</h2>
+    <div class="count">Jagjit Singh · Ghulam Ali · Pankaj Udhas · 23 tracks</div>
+  </div>
+  <div class="station">
+    <div class="poster" id="poster-ghazal" onclick="playStation('ghazal')">
+      <div class="bg" style="background:linear-gradient(160deg,#141310,#2b2418 70%);"></div>
+      <div class="playbtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      <div class="label">TAP TO PLAY</div>
+    </div>
+    <div class="station-info">
+      <h3>The ghazal legends, once the lights go off</h3>
+      <p>The artists whose records made the ghazal what a whole generation of PG rooms still falls asleep to.</p>
+      <div class="track-shelf" id="shelf-ghazal"></div>
+      <a class="open-full" href="https://www.youtube.com/playlist?list=PL4OqLl4qvLkcwY9lO8dhssqCmxynMa-RZ" target="_blank" rel="noopener">Open the full collection on YouTube →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SUFI / NFAK ============ -->
+<section class="rail" id="sufi">
+  <div class="rail-head">
+    <h2>04 — सूफ़ी रात</h2>
+    <div class="count">Nusrat Fateh Ali Khan · qawwali</div>
+  </div>
+  <div class="station">
+    <div class="poster" id="poster-sufi" onclick="playStation('sufi')">
+      <div class="bg" style="background:linear-gradient(160deg,#160f08,#2e1c0e 70%);"></div>
+      <div class="playbtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      <div class="label">TAP TO PLAY</div>
+    </div>
+    <div class="station-info">
+      <h3>The qawwali runs that outgrow the room</h3>
+      <p>Nusrat Fateh Ali Khan's Sufi qawwali hits — for the nights the ghazals aren't quite enough.</p>
+      <div class="track-shelf" id="shelf-sufi"></div>
+      <a class="open-full" href="https://www.youtube.com/playlist?list=PLjr-pfrTxrE4X5daRvxOoz1-_yNo9eJ3y" target="_blank" rel="noopener">Open the full collection on YouTube →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ QUOTE STRIP ============ -->
+<div class="quote-strip">
+  <p>घर याद आता है, पर रिज़ल्ट पहले आना चाहिए।</p>
+  <span>— हर उस कमरे की दीवार पर, जहाँ टाइम-टेबल टंगा है</span>
+</div>
+
+<footer>
+  <span class="brand">मुखर्जी नगर <span style="color:var(--amber)">रेडियो</span></span>
+  <p style="max-width:62ch;">A listening room for exam aspirants — real official playlists, streamed live through YouTube's own player, nothing re-hosted.</p>
+  <div class="foot-links">
+    <a href="#aspirants">Aspirants OST</a>
+    <a href="#motivation">Motivation</a>
+    <a href="#ghazal">Ghazal legends</a>
+    <a href="#sufi">Sufi qawwali</a>
+  </div>
+  <p class="legal">Audio streams through YouTube's own embedded player; all rights stay with the respective labels, composers and performers. Nothing is downloaded or re-hosted here. Song credits are compiled from public film/album soundtrack listings.</p>
+</footer>
+
+<!-- ============ MP3-STYLE STICKY PLAYER ============ -->
+<div class="player-bar" id="playerBar">
+  <div class="pb-progress-row">
+    <span id="pbCurTime">0:00</span>
+    <input type="range" id="pbSeek" min="0" max="100" value="0">
+    <span id="pbDurTime">0:00</span>
+  </div>
+  <div class="player-bar-main">
+    <div class="pb-controls">
+      <button onclick="prevTrack()" title="Previous"><svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg></button>
+      <button class="pb-play" id="pbToggle" onclick="togglePlay()"><svg viewBox="0 0 24 24" id="pbIcon"><path d="M8 5v14l11-7z"/></svg></button>
+      <button onclick="nextTrack()" title="Next"><svg viewBox="0 0 24 24"><path d="M16 6h2v12h-2zM6 6l8.5 6L6 18z"/></svg></button>
+    </div>
+    <div class="pb-meta">
+      <div class="pb-station" id="pbStation">—</div>
+      <div class="pb-title" id="pbTitle">Tap a rotation above to start</div>
+    </div>
+    <button class="pb-close" onclick="closePlayer()">✕</button>
+  </div>
+</div>
+<div id="ytHost"></div>
+
+<script>
+  // starfield
+  const starsEl = document.getElementById('stars');
+  for(let i=0;i<70;i++){
+    const s=document.createElement('div');
+    s.className='star';
+    s.style.left=Math.random()*100+'%';
+    s.style.top=Math.random()*70+'%';
+    s.style.animationDelay=(Math.random()*4)+'s';
+    starsEl.appendChild(s);
+  }
+
+  // ---------- IST clock + on-air rotation ----------
+  function getISTParts(){
+    const now = new Date();
+    const ist = new Date(now.toLocaleString('en-US', {timeZone:'Asia/Kolkata'}));
+    return {h: ist.getHours(), m: ist.getMinutes()};
+  }
+  function currentRotationKey(){
+    const {h} = getISTParts();
+    if(h>=22 || h<5) return 'ghazal';
+    if(h>=5 && h<10) return 'motivation';
+    return 'aspirants'; // 10:00–22:00, priority station
+  }
+  function updateClockAndOnAir(){
+    const {h,m} = getISTParts();
+    const hh = h.toString().padStart(2,'0'), mm = m.toString().padStart(2,'0');
+    document.getElementById('istClock').textContent = `${hh}:${mm} IST`;
+    const key = currentRotationKey();
+    const names = {ghazal:'ग़ज़ल की रात चल रही है', motivation:'सुबह की शुरुआत चल रही है', aspirants:'लाइब्रेरी ऑवर्स — Aspirants OST चल रहा है'};
+    document.getElementById('onAirLabel').textContent = names[key];
+    ['ghazal','motivation','aspirants','sufi'].forEach(k=>{
+      const el = document.getElementById('rc-'+k);
+      if(el) el.classList.toggle('on-air', k===key);
+    });
+  }
+  updateClockAndOnAir();
+  setInterval(updateClockAndOnAir, 30000);
+
+  // ---------- Track shelves (factual metadata only, no lyrics) ----------
+  const SHELVES = {
+    aspirants:[
+      ['Aspirants Theme','Tusshar Mallek','1:41'],
+      ['De Mauka Zindagi','Nilotpal Bora & JUNO','2:48'],
+      ['Beparwaah','Arnab Dutta','2:11'],
+      ['Mohbhang','Parul Mishra','1:46'],
+      ['Dhaaga','Nilotpal Bora & Hussain Haidry','3:53'],
+      ['Bairagi','Rohit Sharma','3:00'],
+      ['Phod De Ya Chhod De','Noxious D','2:25'],
+      ['Guiding Light','Tusshar Mallek','2:33'],
+    ],
+    motivation:[
+      ['Zinda','Bhaag Milkha Bhaag (2013)',''],
+      ['Ek Zindagi','Angrezi Medium (2020)',''],
+      ['Aarambh Hai Prachand','Gulaal (2009)',''],
+      ['Besabriyaan','M.S. Dhoni: The Untold Story (2016)',''],
+      ['Sapney','Bhaag Milkha Bhaag (2013)',''],
+      ['Sultan Theme','Sultan (2016)',''],
+      ['Jeetenge Hum','83 (2021)',''],
+      ['Kar Har Maidaan Fateh','Sanju (2018)',''],
+    ],
+    ghazal:[
+      ['Hoshwalon Ko Khabar Kya','Jagjit Singh',''],
+      ['Tum Ko Dekha Toh','Jagjit Singh — Saath Saath',''],
+      ['Ahista Ahista','Jagjit Singh',''],
+      ['Chupke Chupke Raat Din','Ghulam Ali',''],
+      ['Hungama Hai Kyun','Ghulam Ali',''],
+      ['Chitthi Aayi Hai','Pankaj Udhas — Naam (1986)',''],
+      ['Tere Aane Ki Jab Khabar Mehke','Various',''],
+    ],
+    sufi:[
+      ['Afreen Afreen','Nusrat Fateh Ali Khan — Sangam (1996)',''],
+      ['Mere Rashke Qamar','Nusrat Fateh Ali Khan (1988)',''],
+      ['Tumhe Dillagi','Nusrat Fateh Ali Khan',''],
+      ['Sochta Hoon','Nusrat Fateh Ali Khan (1985)',''],
+      ['Allah Hoo Allah Hoo','Nusrat Fateh Ali Khan',''],
+      ['Dum Mast Qalandar','Nusrat Fateh Ali Khan',''],
+    ]
+  };
+  function renderShelves(){
+    Object.entries(SHELVES).forEach(([key, tracks])=>{
+      const host = document.getElementById('shelf-'+key);
+      if(!host) return;
+      host.innerHTML = tracks.map((t,i)=>{
+        const q = encodeURIComponent(t[0]+' '+t[1]);
+        return `<a class="track" href="https://www.youtube.com/results?search_query=${q}" target="_blank" rel="noopener">
+          <span class="n">${(i+1).toString().padStart(2,'0')}</span>
+          <span class="t">${t[0]}<small>${t[1]}</small></span>
+          <span class="dur">${t[2] || '↗'}</span>
+        </a>`;
+      }).join('');
+    });
+  }
+  renderShelves();
+
+  // ---------- YouTube IFrame API — real mp3-style controls ----------
+  const STATIONS = {
+    aspirants:{ list:'PLVWtdc2bihyzIrWaFMaMwM2VBweSaWpuo', label:'Aspirants OST' },
+    motivation:{ list:'PL6g7bVmaKA0QGxDAVmOnM7IbMc5kef86v', label:'Study Motivation' },
+    ghazal:{ list:'PL4OqLl4qvLkcwY9lO8dhssqCmxynMa-RZ', label:'Ghazal Legends' },
+    sufi:{ list:'PLjr-pfrTxrE4X5daRvxOoz1-_yNo9eJ3y', label:'Sufi Qawwali — NFAK' }
+  };
+  let player = null, apiReady = false, pendingStation = null, currentKey = null, seeking = false;
+
+  const tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  document.head.appendChild(tag);
+
+  window.onYouTubeIframeAPIReady = function(){
+    player = new YT.Player('ytHost', {
+      height:'1', width:'1',
+      playerVars:{ rel:0, modestbranding:1, playsinline:1 },
+      events:{
+        onReady: ()=>{ apiReady = true; if(pendingStation) startStation(pendingStation); },
+        onStateChange: onPlayerStateChange
+      }
+    });
+  };
+
+  function startStation(key){
+    const s = STATIONS[key];
+    if(!s) return;
+    currentKey = key;
+    player.loadPlaylist({list: s.list, listType:'playlist'});
+    document.getElementById('pbStation').textContent = s.label;
+    document.getElementById('playerBar').classList.add('show');
+    highlightPoster(key);
+  }
+
+  function playStation(key){
+    if(!apiReady){ pendingStation = key; document.getElementById('playerBar').classList.add('show'); document.getElementById('pbStation').textContent = STATIONS[key].label; document.getElementById('pbTitle').textContent = 'Loading…'; return; }
+    startStation(key);
+  }
+
+  function highlightPoster(activeKey){
+    Object.keys(STATIONS).forEach(k=>{
+      const p = document.getElementById('poster-'+k);
+      if(p) p.querySelector('.label').textContent = (k===activeKey) ? 'PLAYING NOW' : 'TAP TO PLAY';
+    });
+  }
+
+  function onPlayerStateChange(e){
+    if(e.data === YT.PlayerState.PLAYING){
+      setIcon(true);
+      const data = player.getVideoData();
+      document.getElementById('pbTitle').textContent = data && data.title ? data.title : 'Playing…';
+      startProgressLoop();
+    } else if(e.data === YT.PlayerState.PAUSED){
+      setIcon(false);
+    } else if(e.data === YT.PlayerState.CUED){
+      const data = player.getVideoData();
+      if(data && data.title) document.getElementById('pbTitle').textContent = data.title;
+    }
+  }
+
+  let progressTimer = null;
+  function startProgressLoop(){
+    if(progressTimer) clearInterval(progressTimer);
+    progressTimer = setInterval(()=>{
+      if(!player || seeking) return;
+      const dur = player.getDuration() || 0;
+      const cur = player.getCurrentTime() || 0;
+      document.getElementById('pbSeek').max = dur;
+      document.getElementById('pbSeek').value = cur;
+      document.getElementById('pbCurTime').textContent = fmtTime(cur);
+      document.getElementById('pbDurTime').textContent = fmtTime(dur);
+    }, 500);
+  }
+  function fmtTime(t){
+    t = Math.floor(t||0);
+    const m = Math.floor(t/60), s = (t%60).toString().padStart(2,'0');
+    return `${m}:${s}`;
+  }
+
+  document.getElementById('pbSeek').addEventListener('input', ()=>{ seeking = true; });
+  document.getElementById('pbSeek').addEventListener('change', (e)=>{
+    if(player) player.seekTo(parseFloat(e.target.value), true);
+    seeking = false;
+  });
+
+  function togglePlay(){
+    if(!player) return;
+    const state = player.getPlayerState();
+    if(state === YT.PlayerState.PLAYING) player.pauseVideo();
+    else player.playVideo();
+  }
+  function nextTrack(){ if(player) player.nextVideo(); }
+  function prevTrack(){ if(player) player.previousVideo(); }
+  function setIcon(isPlaying){
+    document.getElementById('pbIcon').innerHTML = isPlaying
+      ? '<path d="M6 5h4v14H6zm8 0h4v14h-4z"/>'
+      : '<path d="M8 5v14l11-7z"/>';
+  }
+  function closePlayer(){
+    if(player) player.stopVideo();
+    document.getElementById('playerBar').classList.remove('show');
+    if(progressTimer) clearInterval(progressTimer);
+    highlightPoster(null);
+  }
+</script>
+</body>
+</html>
